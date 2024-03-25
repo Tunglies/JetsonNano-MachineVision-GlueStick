@@ -82,7 +82,7 @@ class Onnx(BasicModel):
         scores = self.np.max(predictions[:, 4 : 4 + self.num_classes], axis=1)
         mask = scores > self.conf_threshold
         if not self.np.any(mask):
-            return False
+            return frame
 
         predictions = predictions[mask]
         scores = scores[mask]
