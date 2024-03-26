@@ -39,7 +39,7 @@ class Pytorch(BasicModel):
 # Yolov8
 class Onnx(BasicModel):
     def __init__(
-        self, weights_file: str = "best.onnx", conf_threshold: float = 0.45
+        self, weights_file: str = "best.onnx", conf_threshold: float = 0.45, resize_shape: tuple[int] = (640, 640)
     ) -> None:
         super().__init__(weights_file, conf_threshold)
         import cv2
@@ -60,8 +60,8 @@ class Onnx(BasicModel):
 
         self.num_classes = 1
         self.label = "GlueSticker"
-        self.resize_shape = (640, 640)
-        self.font_scale = 640 * 0.0009
+        self.resize_shape = resize_shape
+        self.font_scale = self.resize_shape[0] * 0.0009
         self.thickness = 2
         self.color = (0, 0, 255)
 
