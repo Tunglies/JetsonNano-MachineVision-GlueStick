@@ -145,3 +145,9 @@ class Onnx(BasicModel):
 
         iou = intersection_area / union_area
         return iou
+    
+    def detect(self, frame):
+        pred = self.pre_process(frame)
+        predict = self.predict(pred)
+        output = self.post_process(predict, frame)
+        return output

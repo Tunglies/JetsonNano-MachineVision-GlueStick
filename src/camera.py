@@ -21,6 +21,7 @@ class Camera(nanocamera.Camera):
         if key_code == 27 or key_code == ord("q"):
             self.release()
             cv2.destroyAllWindows()
+            exit(1)
     
     def stream(self):
         while True:
