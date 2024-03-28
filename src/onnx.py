@@ -44,7 +44,7 @@ class Onnx(BasicModel):
         scores = np.max(predictions[:, 4 : 4 + self.num_classes], axis=1)
         mask = scores > self.conf_threshold
         if not np.any(mask):
-            return frame
+            return frame, False
 
         predictions = predictions[mask]
         scores = scores[mask]
@@ -79,7 +79,7 @@ class Onnx(BasicModel):
                 cv2.LINE_AA,
             )
             
-        return frame
+        return frame, True
 
     def xywh2xyxy(self, x):
         y = np.copy(x)
@@ -147,5 +147,5 @@ class Onnx(BasicModel):
     def detect(self, frame):
         pred = self.pre_process(frame)
         predict = self.predict(pred)
-        output = self.post_process(predict, frame)
-        return output
+        output, flag = self.post_process(predict, frame)
+        return output, flag
