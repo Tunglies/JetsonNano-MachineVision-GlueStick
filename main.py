@@ -1,4 +1,9 @@
+import sys
+sys.path.append("/usr/lib/python3.6/dist-packages")
+sys.path.append("/usr/lib/python3/dist-packages")
+
 import time
+from src import utils
 from src import camera
 from src import interface
 from queue import Queue
@@ -65,7 +70,10 @@ for frame in video.stream():
 
     video.imshow(result)
 
-del status
-del beep_thread_instance
-del video
-del model_thread_instance
+
+utils.Utils.clean_garbages(
+    status,
+    beep_thread_instance,
+    video,
+    model_thread_instance
+)
